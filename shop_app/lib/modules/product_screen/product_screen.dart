@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/shared/components/components.dart';
@@ -78,10 +79,20 @@ class Productcreen extends StatelessWidget {
             style: const TextStyle(fontSize: 14.0, height: 1.3),
           ),
           Text(
+            productModel.oldPrice != productModel.price
+                ? '${productModel.oldPrice}.LE'
+                : '',
+            style: const TextStyle(
+                fontSize: 14.0,
+                height: 1.3,
+                color: Colors.blue,
+                decoration: TextDecoration.lineThrough,
+                decorationColor: Colors.black),
+          ),
+          Text(
             '${productModel.price}.LE',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 14.0, height: 1.3),
+            style: const TextStyle(
+                fontSize: 14.0, height: 1.3, color: Colors.blue),
           ),
         ],
       );
