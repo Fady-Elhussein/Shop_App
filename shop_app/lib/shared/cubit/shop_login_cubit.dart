@@ -31,6 +31,32 @@ class ShopLoginCubit extends Cubit<ShopLoginStates> {
       emit(ShopLoginErrorState(onError.toString()));
     });
   }
+  void userRegister({
+    required String name,
+    required String phone,
+    required String email,
+    required String password,
+  }) {
+    emit(ShopRegisterLoadingState());
+    DioHelper.postData(
+      url: rEGISTER,
+      data: {
+      'name': name,
+      'phone': phone,
+      'email': email,
+      'password': password,
+    }).then((value) {
+      loginModel = ShopLoginModel.fromJson(value?.data);
+      print(loginModel?.status);
+      print(loginModel?.message);
+      print(loginModel?.data?.token);
+      emit(ShopRegisterSuccessState(loginModel!));
+    }).catchError((onError) {
+      print("Error : $onError.toString()");
+      emit(ShopRegisterErrorState(onError.toString()));
+    });
+  }
+
 
   
 

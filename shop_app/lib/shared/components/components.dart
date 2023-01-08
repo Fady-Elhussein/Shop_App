@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shop_app/shared/styles/themes.dart';
 
 Widget defultButton({
   double width = double.infinity,
@@ -111,7 +112,9 @@ Widget loadingAnimation() => Column(
       children: [
         Center(
           child: LoadingAnimationWidget.staggeredDotsWave(
-              color: Colors.black, size: 40),
+            size: 40,
+            color: Colors.black
+          ),
         ),
         const SizedBox(
           height: 12,
@@ -119,7 +122,6 @@ Widget loadingAnimation() => Column(
         const Text(
           'Loading...',
           style: TextStyle(
-            color: Colors.black,
           ),
         ),
       ],

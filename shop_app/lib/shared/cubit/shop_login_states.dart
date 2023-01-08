@@ -17,6 +17,19 @@ class ShopLoginErrorState extends ShopLoginStates {
 
   ShopLoginErrorState(this.error);
 }
+class ShopRegisterLoadingState extends ShopLoginStates {}
+
+class ShopRegisterSuccessState extends ShopLoginStates {
+  final ShopLoginModel loginModel;
+
+  ShopRegisterSuccessState(this.loginModel);
+}
+
+class ShopRegisterErrorState extends ShopLoginStates {
+  final String error;
+
+  ShopRegisterErrorState(this.error);
+}
 
 
 

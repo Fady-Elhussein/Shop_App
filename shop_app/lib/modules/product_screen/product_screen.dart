@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/home_model.dart';
@@ -22,6 +21,7 @@ class Productcreen extends StatelessWidget {
   }
 
   Widget buildBannerItem(HomeModel homeModel) => SingleChildScrollView(
+        physics:const BouncingScrollPhysics(),
         child: Column(
           children: [
             CarouselSlider(
@@ -48,6 +48,17 @@ class Productcreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
+            // Stack(
+            //   children: const [
+            //     Image(
+            //       image: NetworkImage('https://student.valuxapps.com/storage/uploads/categories/16301438353uCFh.29118.jpg'),
+            //       width: 100.0,
+            //       height: 100.0,
+            //       fit: BoxFit.cover,
+            //     ),
+            //     Text('data')
+            //   ],
+            // ),
             GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -87,8 +98,10 @@ class Productcreen extends StatelessWidget {
                 height: 1.3,
                 color: Colors.blue,
                 decoration: TextDecoration.lineThrough,
-                decorationColor: Colors.black),
-          ),
+                decorationColor: Colors.black,
+                decorationThickness: 3.0,
+                )
+                ),
           Text(
             '${productModel.price}.LE',
             style: const TextStyle(
