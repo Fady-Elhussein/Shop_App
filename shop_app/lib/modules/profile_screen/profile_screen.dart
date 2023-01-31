@@ -111,13 +111,13 @@ class ProfileScreen extends StatelessWidget {
                                   CacheHelper.removeData(key: 'token')
                                       ?.then((value) {
                                     if (value!) {
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                             const ShopLoginScreen(),
                                           ),
-                                              (route) => true);
+                                              );
                                     }
                                   });
                                 },

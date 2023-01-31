@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout.dart';
@@ -14,6 +16,8 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
+  print( CacheHelper.getData(key: 'token'));
+
   bool boardingShown = CacheHelper.getData(key: 'boardingShown') ?? false;
   token = CacheHelper.getData(key: 'token') ?? 'false';
   Widget widget;

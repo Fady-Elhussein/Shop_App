@@ -37,12 +37,12 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
               ).then(
                 (value) {
                   token = state.loginModel.data?.token;
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const ShopLayout(),
                       ),
-                      (route) => false);
+                     );
                 },
               );
               showToast(
