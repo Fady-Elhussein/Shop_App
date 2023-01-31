@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:shop_app/shared/styles/themes.dart';
 
 Widget defultButton({
   double width = double.infinity,
@@ -27,14 +25,16 @@ Widget defulttextformfiled(
         {required controller,
         required keyboardType,
         bool obscureText = false,
-        required String text,
+         String? text,
         Icon? prefixIcon,
         Color? inputTextStyleColor,
         IconButton? suffixIcon,
+       required bool readOnly,
         String? Function(String?)? validator,
         Function(String?)? onFieldSubmitted}) =>
     TextFormField(
       cursorColor: Colors.blue,
+      readOnly:readOnly,
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
@@ -93,18 +93,14 @@ List<BottomNavigationBarItem> bottomNavBar = [
     label: "categories",
   ),
   const BottomNavigationBarItem(
-    icon: Icon(Icons.favorite_outline),
-    label: "favorite ",
+    icon: Icon(Icons.favorite),
+    label: "favorite",
   ),
   const BottomNavigationBarItem(
-    icon: Icon(Icons.settings),
-    label: "settings ",
+    icon: Icon(Icons.person),
+    label: "Profile",
   ),
 ];
-
-
-
-
 
 Widget loadingAnimation() => Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,18 +108,14 @@ Widget loadingAnimation() => Column(
       children: [
         Center(
           child: LoadingAnimationWidget.staggeredDotsWave(
-            size: 40,
-            color: Colors.black
-          ),
+              size: 40, color: Colors.black),
         ),
         const SizedBox(
           height: 12,
         ),
         const Text(
           'Loading...',
-          style: TextStyle(
-          ),
+          style: TextStyle(),
         ),
       ],
     );
-

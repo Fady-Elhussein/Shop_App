@@ -13,7 +13,7 @@ class ShopLoginModel {
 
 class UserData {
   int? id;
-  String? name;
+   String? name;
   String? email;
   String? phone;
   String? image;
@@ -25,6 +25,7 @@ class UserData {
     phone = json['phone'];
     image = json['image'];
     token = json['token'];
+    email = json['email'];
   }
 }
 

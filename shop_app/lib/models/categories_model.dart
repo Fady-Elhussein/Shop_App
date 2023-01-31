@@ -4,17 +4,19 @@ class CategoriesModel {
 
   CategoriesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = CategoriesDataModel.fromJson(json['data']); // بجيبها بالطريقة دي  object  علشان الداتا دي
+    data = json['data'] != null ? CategoriesDataModel.fromJson(json['data']) : null;
+ // بجيبها بالطريقة دي  object  علشان الداتا دي
   }
+
 }
 
 class CategoriesDataModel {
   int? currentPage;
-  List<DataModel>? data;
+  List<DataModel>? data=[];
   CategoriesDataModel.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     json['data'].forEach((element) {
-      data?.add(DataModel.fromJson(json['data']));
+      data?.add(DataModel.fromJson(element));
     });
   }
 }

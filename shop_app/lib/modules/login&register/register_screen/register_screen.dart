@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/modules/login&register/login_screen/shoplogin_screen.dart';
-import 'package:shop_app/shared/cubit/shop_login_cubit.dart';
-import 'package:shop_app/shared/cubit/shop_login_states.dart';
+import 'package:shop_app/shared/cubit/shop_login_cubit/shop_login_cubit.dart';
 
 import '../../../shared/components/components.dart';
+import '../../../shared/cubit/shop_login_cubit/shop_login_states.dart';
 import '../../../shared/network/local/cache_helper.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -15,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
+
 class _RegisterScreenState extends State<RegisterScreen> {
   var emailcontroller = TextEditingController();
   var passwordcontroller = TextEditingController();
@@ -30,33 +29,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
         listener: (context, state) {
           if (state is ShopRegisterSuccessState) {
-              if (state.loginModel.status!) // true ب  status  لو ال
-              {
-                print(state.loginModel.data?.token);
-                print(state.loginModel.message);
-                CacheHelper.saveData(
-                  key: 'token',
-                  value: state.loginModel.data?.token,
-                ).then((value) {
+            if (state.loginModel.status!) // true ب  status  لو ال
+            {
+              CacheHelper.saveData(
+                key: 'token',
+                value: state.loginModel.data?.token,
+              ).then(
+                (value) {
                   Navigator.pushAndRemoveUntil(
-                    context, 
-                    MaterialPageRoute(builder:(context) => const ShopLoginScreen(), ), 
-                    (route) => false);
-                }, );
-                showToast(
-                    context: context,
-                    msg: state.loginModel.message!,
-                    state: ToastStates.success
-                    );
-              } else {
-                print(state.loginModel.message);
-                showToast(
-                    context: context,
-                    msg:passwordcontroller.text==conformpasswordcontroller.text? state.loginModel.message!:"password Not Match",
-                    state: ToastStates.error,
-                    );
-              }
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShopLoginScreen(),
+                      ),
+                      (route) => false);
+                },
+              );
+              showToast(
+                  context: context,
+                  msg: state.loginModel.message!,
+                  state: ToastStates.success);
+            } else {
+              showToast(
+                context: context,
+                msg: passwordcontroller.text == conformpasswordcontroller.text
+                    ? state.loginModel.message!
+                    : "password Not Match",
+                state: ToastStates.error,
+              );
             }
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -87,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 40.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           controller: fnameController,
                           keyboardType: TextInputType.name,
                           text: 'Name',
@@ -102,6 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 40.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           controller: emailcontroller,
                           keyboardType: TextInputType.emailAddress,
                           text: 'Email Address',
@@ -117,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 25.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'password is required.';
@@ -126,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           controller: passwordcontroller,
                           keyboardType: TextInputType.visiblePassword,
                           text: "Password",
-                          prefixIcon: const Icon(Icons.lock),
+                          prefixIcon: const Icon(Icons.password),
                           obscureText: passwordvisable,
                           suffixIcon: IconButton(
                               onPressed: () {
@@ -146,13 +150,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 25.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please Conform password ';
                             }
                             return null;
                           },
-                          prefixIcon: const Icon(Icons.lock),
+                          prefixIcon: const Icon(Icons.password),
                           controller: conformpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
                           text: "Conform Password",
@@ -162,6 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 25.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           controller: phoneController,
                           keyboardType: TextInputType.name,
                           text: 'Phone',
@@ -178,18 +184,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         state is! ShopRegisterLoadingState
                             ? defultButton(
-                          width: double.infinity,
-                          function: () {
-                           if (formkey.currentState!.validate()) {
+                                width: double.infinity,
+                                function: () {
+                                  if (formkey.currentState!.validate()) {
                                     ShopLoginCubit.get(context).userRegister(
                                         email: emailcontroller.text,
                                         name: fnameController.text,
                                         phone: phoneController.text,
-                                        password: passwordcontroller.text==conformpasswordcontroller.text?passwordcontroller.text:'Err');
+                                        password: passwordcontroller.text ==
+                                                conformpasswordcontroller.text
+                                            ? passwordcontroller.text
+                                            : 'Err');
                                   }
-                          },
-                          text: 'Register',
-                        ): const CircularProgressIndicator(),
+                                  return null;
+                                },
+                                text: 'Register',
+                              )
+                            : const CircularProgressIndicator(),
                         const SizedBox(
                           height: 50.0,
                         ),

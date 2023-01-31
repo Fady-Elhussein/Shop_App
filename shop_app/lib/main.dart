@@ -6,7 +6,6 @@ import 'package:shop_app/shared/cubit/bloc_observer.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
-
 import 'const/constants.dart';
 import 'modules/login&register/login_screen/shoplogin_screen.dart';
 
@@ -30,7 +29,8 @@ void main() async {
   }
   runApp(MyApp(
     startWidget: widget,
-  ));
+  )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +44,10 @@ class MyApp extends StatelessWidget {
       home: startWidget,
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
     );
   }
+
+
+
 }

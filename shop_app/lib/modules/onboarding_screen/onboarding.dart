@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/const/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -25,17 +24,17 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<BoardingModel> boarding = [
     BoardingModel(
-        image: 'assets/images/shop.png',
-        title: 'On Board 1 Title ',
-        body: 'On Board 1 Body '),
+        image: 'assets/images/on_Boarding1.png',
+        title: 'ORDER ONLINE ',
+        body: 'make your order sitting on a Sofa.\n play and choose online'),
     BoardingModel(
-        image: 'assets/images/shop.png',
-        title: 'On Board 2 Title ',
-        body: 'On Board 2 Body '),
+        image: 'assets/images/on_Boarding3.png',
+        title: 'M-COMMERCE',
+        body: 'Download our application and buy using your phone or laptop'),
     BoardingModel(
-        image: 'assets/images/shop.png',
-        title: 'On Board 3 Title ',
-        body: 'On Board 3 Body '),
+        image: 'assets/images/on_Boarding2.png',
+        title: 'DELIVERY SERVICES',
+        body: 'Modern delivering technologies. shipping to the porch of you apartment'),
   ];
   var boardController = PageController();
   bool isLast = false;
@@ -152,6 +151,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
+            // ignore: sized_box_for_whitespace
             child: Container(
                 width: double.infinity,
                 child: Image(image: AssetImage(model.image))),
@@ -163,6 +163,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             model.title,
             style: const TextStyle(
               fontSize: 24.0,
+              color: Colors.blue,
               fontWeight: FontWeight.bold,
             ),
           ),

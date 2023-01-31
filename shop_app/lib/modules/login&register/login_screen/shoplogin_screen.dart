@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/const/constants.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login&register/register_screen/register_screen.dart';
-import 'package:shop_app/shared/cubit/shop_login_cubit.dart';
-import 'package:shop_app/shared/cubit/shop_login_states.dart';
+import 'package:shop_app/shared/cubit/shop_login_cubit/shop_login_cubit.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
 import '../../../shared/components/components.dart';
+import '../../../shared/cubit/shop_login_cubit/shop_login_states.dart';
 
 class ShopLoginScreen extends StatefulWidget {
   const ShopLoginScreen({super.key});
@@ -30,23 +31,25 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
           if (state is ShopLoginSuccessState) {
             if (state.loginModel.status!) // true ب  status  لو ال
             {
-              print(state.loginModel.data?.token);
-              print(state.loginModel.message);
               CacheHelper.saveData(
                 key: 'token',
                 value: state.loginModel.data?.token,
-              ).then((value) {
-                Navigator.pushAndRemoveUntil(
-                  context, 
-                  MaterialPageRoute(builder:(context) => const ShopLayout(), ), 
-                  (route) => false);
-              }, );
+              ).then(
+                (value) {
+                  token = state.loginModel.data?.token;
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShopLayout(),
+                      ),
+                      (route) => false);
+                },
+              );
               showToast(
                   context: context,
                   msg: state.loginModel.message!,
                   state: ToastStates.success);
             } else {
-              print(state.loginModel.message);
               showToast(
                   context: context,
                   msg: state.loginModel.message!,
@@ -80,6 +83,7 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                         ),
                         defulttextformfiled(
                           controller: emailcontroller,
+                          readOnly: false,
                           keyboardType: TextInputType.emailAddress,
                           text: 'Email Address',
                           prefixIcon: const Icon(Icons.email),
@@ -94,6 +98,7 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                           height: 25.0,
                         ),
                         defulttextformfiled(
+                          readOnly: false,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Password is required.';
@@ -103,7 +108,7 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                           controller: passwordcontroller,
                           keyboardType: TextInputType.visiblePassword,
                           text: "Password",
-                          prefixIcon: const Icon(Icons.lock),
+                          prefixIcon: const Icon(Icons.password),
                           obscureText: passwordvisable,
                           onFieldSubmitted: (value) {
                             if (formkey.currentState!.validate()) {
@@ -138,6 +143,7 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                                         email: emailcontroller.text,
                                         password: passwordcontroller.text);
                                   }
+                                  return null;
                                 },
                                 text: 'Login',
                               )

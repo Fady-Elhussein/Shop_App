@@ -35,6 +35,7 @@ class ProductModel {
   dynamic price;
   dynamic oldPrice;
   dynamic discount;
+  String? description;
   String? image;
   String? name;
   bool? inFavorites;
@@ -48,5 +49,6 @@ class ProductModel {
     name = json['name'];
     inFavorites = json['in_favorites'];
     inCart = json['in_cart'];
+    description = json['description'];
   }
 }
