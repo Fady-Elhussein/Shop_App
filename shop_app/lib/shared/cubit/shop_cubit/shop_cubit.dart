@@ -28,6 +28,9 @@ class ShopCubit extends Cubit<ShopStates> {
   int currentIndex = 0;
   changeNavBar(int index) {
     currentIndex = index;
+    if(currentIndex==3){
+      getUserData();
+    }
     emit(ShopBottomNavBarState());
   }
 

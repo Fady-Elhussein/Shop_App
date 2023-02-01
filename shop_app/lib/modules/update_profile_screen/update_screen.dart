@@ -29,7 +29,7 @@ class UpdateScreen extends StatelessWidget {
             showToast(context: context, msg: 'UpDate Done Successfully',state: ToastStates.success);
           }
           if (state is ShopErrorUpdateProfileState) {
-            showToast(context: context, msg: 'UpDate Done Successfully',state: ToastStates.error);
+            showToast(context: context, msg: 'Error on UpDate Try Later',state: ToastStates.error);
           }
         },
         builder: (context, state) {
@@ -120,7 +120,6 @@ class UpdateScreen extends StatelessWidget {
                                 name: nameController.text,
                                 phone: phoneController.text,
                                 email: emailController.text,
-
                               );
                             }
 
