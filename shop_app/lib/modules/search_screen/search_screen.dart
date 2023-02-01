@@ -22,6 +22,9 @@ class SearchScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = SearchCubit.get(context);
           return Scaffold(
+            appBar: AppBar(
+              title:const Text('Search'),
+            ),
             body: Form(
               key: formKey,
               child: Padding(

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/shared/cubit/shop_cubit/shop_state.dart';
@@ -11,12 +10,12 @@ class UpdateScreen extends StatelessWidget {
   final TextEditingController phoneController;
   final String userImage;
 
-   UpdateScreen(
+  UpdateScreen(
       {super.key,
-      required this.nameController,
-      required this.emailController,
-      required this.phoneController,
-      required this.userImage});
+        required this.nameController,
+        required this.emailController,
+        required this.phoneController,
+        required this.userImage});
 
   var formkey = GlobalKey<FormState>();
 

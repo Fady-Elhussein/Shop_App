@@ -46,7 +46,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           context,
           MaterialPageRoute(builder: (context) => const ShopLoginScreen()),
           (route) => false,
-
         );
       }
     });
