@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
         emailController.text = cubit.userModel!.data!.email!;
         phoneController.text = cubit.userModel!.data!.phone!;
         String userImage ='https://cdn-icons-png.flaticon.com/512/1077/1077012.png';
-        if(cubit.userModel !=null) {
+        if(cubit.userModel?.data !=null) {
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -119,6 +119,7 @@ class ProfileScreen extends StatelessWidget {
                                           ),
                                               );
                                     }
+                                    showToast(context: context, msg: 'Log out Done',state: ToastStates.error);
                                   });
                                 },
                                 icon: const Icon(

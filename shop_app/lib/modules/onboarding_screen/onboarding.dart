@@ -42,9 +42,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void skipOnBoarding() {
     CacheHelper.saveData(key: 'boardingShown', value: true).then((value) {
       if (value == true) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const ShopLoginScreen()),
+          (route) => false,
+
         );
       }
     });
@@ -78,7 +80,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                     Navigator.pop(context);
                                   },
                                   child: const Text('No')),
-                            ]));
+                            ]),
+                );
               },
               child: const Text("Skip")),
         ],

@@ -60,7 +60,7 @@ void showToast({
       msg: msg,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 5,
+      timeInSecForIosWeb: 3,
       fontSize: 16,
       backgroundColor: chooseToastColor(state!),
     );

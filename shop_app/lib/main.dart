@@ -16,8 +16,6 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
-  print( CacheHelper.getData(key: 'token'));
-
   bool boardingShown = CacheHelper.getData(key: 'boardingShown') ?? false;
   token = CacheHelper.getData(key: 'token') ?? 'false';
   Widget widget;
